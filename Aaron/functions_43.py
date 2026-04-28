@@ -4,13 +4,6 @@ def norm(v):
 def normalize(v):
     return v / norm(v)
 
-# def eig(A, iterations = 1000):
-#     A = np.copy(A)
-    
-
-#     return eigenvalues, eigenvectors
-def qe_decomposition(A):
-    import numpy as np
 
 def qr_decomposition(A):
     A = A.copy()
@@ -47,7 +40,7 @@ def svd(A):
     AtA = A.T @ A
     # Step 2: Eigen-decomposition of ATA
     diag, eigvectors = qr_iteration(AtA)
-    eigvals = np.maximum(np.diag(diag), 0)  # Ensure non-negative eigenvalues, since ATA has all non-negative eigenvalues
+    eigvals = np.maximum(np.diag(diag), 0)  # Ensure non-negative eigenvalues, since ATA has all non-negative eigenvalues, floating point errors might cause small negative values
     Sigma = np.diag(np.sqrt(eigvals))
     V = eigvectors
     #Solve for U by using A = U * Sigma * V^T to get U = A * V * Sigma^-1   (since V is orthogonal, VT * V = I)
